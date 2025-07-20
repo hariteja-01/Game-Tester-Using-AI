@@ -22,7 +22,7 @@ except ImportError:
 # -----------------------------
 # PASTE YOUR GEMINI API KEY HERE
 # -----------------------------
-DEFAULT_API_KEY = os.getenv("GEMINI_API_KEY", "")  # Replace with your valid Gemini API key from https://ai.google.dev/
+DEFAULT_API_KEY = "PlaceYourKey"  # Replace with your valid Gemini API key from https://ai.google.dev/
 # -----------------------------
 
 # Set page configuration
