@@ -1,210 +1,174 @@
-Game Tester Dashboard
-=====================
+# ⚡ Agentic-QA-Platform: Autonomous Multi-Agent Game Testing & Telemetry Engine
 
-Overview
---------
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.38+-FF4B4B.svg)](https://streamlit.io)
+[![Google Gemini API](https://img.shields.io/badge/Google%20Gemini-SDK%20Integrated-4285F4.svg)](https://ai.google.dev/)
+[![CI/CD Ready](https://img.shields.io/badge/CI%2FCD-JUnit%20%7C%20SARIF%20v2.1-success.svg)](https://github.com/hariteja-01/Game-Tester-Using-AI)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-The **Game Tester Dashboard** is a Python-based web application built with Streamlit, designed to assist game developers and testers in evaluating game performance, tracking bugs, and analyzing player satisfaction. It generates mock test reports for a predefined list of over 700 popular video games, providing detailed analytics through interactive visualizations. The application includes an AI-powered chatbot, integrated with the Google Gemini API, which offers real-time assistance and supports file uploads (images and text) for analysis. With a sleek, user-friendly interface styled using custom CSS, the dashboard is an effective tool for optimizing game development and testing workflows.
+An enterprise-grade, production-ready **Autonomous Multi-Agent Telemetry & QA Platform** for video games and real-time graphics applications. Engineered to shift game quality assurance from static mock reports to an active **Multi-Agent Orchestration Engine** that captures live process metrics (`psutil`), executes autonomous Root Cause Analysis (RCA), generates automated Git unified diff code patches, and exports CI/CD integration artifacts (JUnit XML, SARIF v2.1.0, Release Risk Scores).
 
-Features
---------
+---
 
-*   **Game Selection**: Choose from a curated list of over 700 video games for test report generation.
-    
-*   **Mock Test Reports**: Generate comprehensive reports including:
-    
-    *   Performance metrics (FPS, CPU/GPU usage, memory usage).
-        
-    *   Bug tracking (categorized by type, severity, and area with detailed descriptions).
-        
-    *   Gameplay statistics (playtime, completion rate, player deaths, achievements).
-        
-    *   User satisfaction scores and platform-specific performance.
-        
-*   **Interactive Visualizations**:
-    
-    *   FPS distribution histogram.
-        
-    *   Resource utilization bar chart.
-        
-    *   Performance-over-time line chart.
-        
-    *   Bug distribution pie chart and severity bar chart.
-        
-    *   Platform performance comparison bar chart.
-        
-*   **AI-Powered Chatbot**:
-    
-    *   Real-time assistance using the Google Gemini API.
-        
-    *   Supports text queries and file uploads (images, text, CSV, JSON, etc.).
-        
-    *   Contextual responses based on test results and chat history.
-        
-*   **File Upload Support**:
-    
-    *   Upload images for visual analysis with preview.
-        
-    *   Upload text-based files (e.g., logs, scripts) for content analysis.
-        
-*   **Customizable UI**:
-    
-    *   Collapsible API key configuration and chatbot interface.
-        
-    *   Custom CSS for enhanced aesthetics (report cards, hover effects, chat styling).
-        
-    *   Progress bar for loading states and error handling for invalid inputs.
-        
-*   **Recommendations**: Personalized suggestions for game optimization based on test results.
-    
+## 🌟 Key Features
 
-Prerequisites
--------------
+- **Multi-Agent Orchestration**: Stateful pipeline coordinating 4 specialized AI agents:
+  1. 🟢 `StressAgent`: Synthesizes dynamic runtime edge-cases and quantitative workload parameters.
+  2. 🔵 `TelemetryAgent`: Ingests real process execution metrics via `psutil` (or high-fidelity Gaussian synthetic gaming curves).
+  3. 🟡 `RCAAgent`: Deep stack-trace and log correlation for automated root cause attribution.
+  4. 🟣 `PatchAgent`: Synthesizes production-ready C++/C# Git unified diff patches (`.patch` format) proposing direct codebase fixes.
+- **Deterministic Release Risk Scoring**: 0–100 safety score evaluating memory leak slopes, thread contention, and defect severity counts to power automated CI/CD release gates.
+- **Enterprise CI/CD Artifacts**:
+  - **JUnit XML Exporter**: Compatible with GitHub Actions, Jenkins, and GitLab CI.
+  - **SARIF v2.1.0 Exporter**: Direct integration with GitHub Code Scanning & security dashboards.
+  - **Pre-commit Git Hooks**: Automated local gatekeeping before pull requests.
+- **Modern Dark Engineering Dashboard**: Sleek, glass-morphism developer portal featuring Plotly telemetry charts, interactive Gantt reasoning timelines, side-by-side log inspectors, and syntax-highlighted diff viewers.
+- **Zero-Trust Security**: No hardcoded API keys. Dynamic retrieval via `os.getenv("GEMINI_API_KEY")` and Streamlit `st.secrets` with complete `.gitignore` enforcement.
 
-*   **Python 3.8+**: Ensure Python is installed on your system.
-    
-*   **Google Gemini API Key**: Obtain an API key from [Google AI Studio](https://ai.google.dev/).
-    
+---
 
-Installation
-------------
+## 🏗️ Architecture & Directory Structure
 
-1.  ```bash
-    git clone https://github.com/hariteja-01/Game-Tester-Using-AI.gitcd Game-Tester-Using-AI
-    ```
-    
-2.  ```bash
-    python -m venv venvsource venv/bin/activate # On Windows: venv\\Scripts\\activate
-    ```
-    
-3.  ```bash
-    pip install -r requirements.txtThe requirements.txt
-    should include:
-    streamlit==1.38.0
-    google-generativeai==0.7.2
-    plotly==5.24.1
-    pandas==2.2.3
-    pillow==10.4.0
-    ```
-    
-4.  **Configure the Gemini API Key**:
-    
-    *   DEFAULT\_API\_KEY = "your-gemini-api-key"
-        
-    *   Alternatively, input the API key through the dashboard's UI during runtime.
-        
+```
+agentic_qa_platform/
+├── agents/
+│   ├── __init__.py
+│   ├── orchestrator.py        # Central state graph controller & execution pipeline
+│   ├── stress_agent.py        # Synthetic load & edge-case test scenario generator
+│   ├── telemetry_agent.py     # Real-time process & metric ingestion agent
+│   ├── rca_agent.py           # Deep stack-trace & log Root Cause Analysis agent
+│   └── patch_agent.py         # Autonomous Git-diff/patch generation agent
+├── telemetry/
+│   ├── __init__.py
+│   ├── process_monitor.py     # Live tracking via psutil (CPU, RAM, GPU, threads, I/O)
+│   └── log_parser.py          # Structured parsing of crash logs & stack traces
+├── cicd/
+│   ├── __init__.py
+│   ├── junit_exporter.py      # Standard JUnit XML test execution reports
+│   ├── sarif_exporter.py      # SARIF v2.1.0 static analysis / defect reports
+│   └── risk_scorer.py         # Deterministic Release Risk Score calculation (0-100)
+├── ui/
+│   ├── __init__.py
+│   ├── components.py          # Custom dark-themed glass-morphism cards & Plotly charts
+│   └── trace_viewer.py        # Visualizer for multi-agent reasoning traces & Gantt timeline
+├── app.py                     # Main Streamlit application entry point
+├── requirements.txt           # Production dependencies
+└── README.md
+```
 
-Usage
------
+---
 
-1.  ```bash
-    streamlit run AICA3_S1.py
-    ```
-    
-2.  **Access the Dashboard**:
-    
-    *   Open your browser and navigate to http://localhost:8501.
-        
-    *   The dashboard will load with a game selection form and API key configuration section.
-        
-3.  **Generate a Test Report**:
-    
-    *   Select a game from the dropdown menu (e.g., "Minecraft", "Elden Ring").
-        
-    *   Click "Generate Test Report" to create a mock test report with visualizations and bug details.
-        
-4.  **Interact with the Chatbot**:
-    
-    *   Click the chat icon (💬) in the bottom-right corner to open the chatbot.
-        
-    *   Type queries or upload files (images or text) for analysis.
-        
-    *   The chatbot provides contextual responses based on test results or uploaded content.
-        
-5.  **Explore Visualizations and Recommendations**:
-    
-    *   View performance charts, bug distributions, and platform comparisons.
-        
-    *   Review the detailed bug list and personalized recommendations for game optimization.
+## 🚀 Quickstart
 
-Technologies Used
------------------
+### 1. Clone & Set Up Environment
 
-*   **Programming Languages**: Python, HTML/CSS (for Streamlit styling)
-    
-*   **Libraries and Frameworks**:
-    
-    *   Streamlit: Web application framework
-        
-    *   google-generativeai: Google Gemini API integration
-        
-    *   Plotly: Interactive visualizations
-        
-    *   Pandas: Data manipulation
-        
-    *   Pillow: Image processing
-        
-*   **Other Tools**:
-    
-    *   Google Gemini API: AI-powered chatbot
-        
-    *   GitHub: Version control
-        
-    *   Streamlit Community Cloud: Optional deployment platform
-        
+```bash
+git clone https://github.com/hariteja-01/Game-Tester-Using-AI.git
+cd Game-Tester-Using-AI
 
-Deployment
-----------
+# Create virtual environment
+python -m venv venv
 
-To deploy the application on **Streamlit Community Cloud**:
+# Activate virtual environment
+# Windows:
+venv\Scripts\activate
+# Linux/macOS:
+source venv/bin/activate
 
-1.  Push the repository to GitHub.
-    
-2.  Sign in to [Streamlit Community Cloud](https://share.streamlit.io/).
-    
-3.  Create a new app, linking it to your GitHub repository.
-    
-4.  Specify AICA3_S1.py as the main script.
-    
-5.  Add the Gemini API key as a secret in the app settings.
-    
-6.  Deploy the app and access it via the provided URL.
-    
+# Install production dependencies
+pip install -r requirements.txt
+```
 
-Future Enhancements
--------------------
+### 2. Configure Credentials (Secure)
 
-*   Integrate real test data from game testing frameworks.
-    
-*   Add support for user-defined games or external game APIs.
-    
-*   Implement user authentication and report export (PDF/CSV).
-    
-*   Enhance chatbot with advanced NLP or multi-model AI support.
-    
-*   Add multi-language support for global accessibility.
-    
-*   Enable real-time collaboration for team-based testing.
-    
+Create a local `.env` file (which is strictly excluded by `.gitignore`):
 
-Troubleshooting
----------------
+```bash
+# .env
+GEMINI_API_KEY=your_google_gemini_api_key_here
+```
 
-*   **Gemini API Key Error**: Ensure the API key is valid and has access to the gemini-1.5-flash model. Check [Google AI Studio](https://ai.google.dev/) for key generation.
-    
-*   **Module Not Found**: Verify all dependencies are installed (pip install -r requirements.txt).
-    
-*   **Invalid Game Name**: Select a game from the provided dropdown list, as only predefined games are supported.
-    
-*   **Chatbot Not Responding**: Check internet connectivity and API key configuration.
-    
+*Note: The platform also supports runtime key entry via the dashboard UI or deployment secrets (`.streamlit/secrets.toml`).*
 
-License
--------
+### 3. Launch the Developer Portal
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/hariteja-01/Game-Tester-Using-AI/blob/main/LICENSE) file for details.
+```bash
+streamlit run app.py
+```
 
-Contact
--------
+The portal will open at `http://localhost:8501`.
 
-For questions or contributions, please contact \[[Click here!](mailto:patnalahariteja@gmail.com)\] or open an issue on the [GitHub Repository Issues](https://github.com/hariteja-01/Game-Tester-Using-AI/issues).
+---
+
+## 📊 Dashboard Modules
+
+1. **System Overview & KPIs**: Real-time KPI metric cards, Release Risk Gauge (0–100), Framerate Stability Timeline (60/30 FPS thresholds), CPU vs. RAM utilization curves, and bug severity charts.
+2. **Agent Reasoning Traces**: Interactive Gantt execution timeline displaying start/end timestamps, step-level latencies, and expandable JSON payloads for all 4 autonomous agents.
+3. **RCA & Autonomous Patching**: Filterable live engine log feed paired with AI root cause attribution and syntax-highlighted, downloadable `.patch` files.
+4. **CI/CD & Compliance Hub**: One-click downloads for `junit_report.xml`, `sarif_report.json`, `.pre-commit-config.yaml`, and copyable GitHub Actions CI workflow definitions.
+
+---
+
+## 🔄 CI/CD Pipeline Integration
+
+### GitHub Actions Workflow
+
+Add this to `.github/workflows/agentic_qa.yml`:
+
+```yaml
+name: Agentic QA Game Test Suite
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  telemetry-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Execute Autonomous QA Platform
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python -c "from agentic_qa_platform.agents import Orchestrator; o = Orchestrator(); res = o.run_full_analysis('Cyberpunk 2077'); assert res.risk_assessment.overall_score >= 50, 'Release Gate Blocked!'"
+```
+
+---
+
+## 🌐 Deployment to Streamlit Community Cloud
+
+1. Push this repository to your GitHub account.
+2. Navigate to [share.streamlit.io](https://share.streamlit.io/) and select this repository.
+3. Set **Main file path** to `app.py`.
+4. Under **Advanced settings > Secrets**, add:
+   ```toml
+   GEMINI_API_KEY = "your_google_gemini_api_key"
+   ```
+5. Click **Deploy**!
+
+---
+
+## 🛡️ Security & Zero-Leakage Guarantee
+
+- Local `.env` and `.streamlit/secrets.toml` are strictly defined in `.gitignore`.
+- Fallback heuristic mechanisms ensure the platform operates seamlessly even during network isolation or upstream API downtime.
+- No confidential credentials or tokens are ever embedded in commits or artifacts.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
